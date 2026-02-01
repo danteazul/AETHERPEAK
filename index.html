@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ÆTHERPEAK™ | Alpine Performance for the Ascended</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --glacier-ash: #e8e6e1;
+            --basalt-whisper: #3a3a38;
+            --alpine-void: #1a1a19;
+            --unbleached-snow: #f5f4f0;
+            --accent-gold: #c9b896;
+            --text-primary: #1a1a19;
+            --text-secondary: #6b6b68;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--unbleached-snow);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            font-weight: 300;
+        }
+
+        /* Preloader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--alpine-void);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            animation: preloaderFade 0.8s ease-out 2s forwards;
+        }
+
+        .preloader-text {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2rem, 5vw, 4rem);
+            color: var(--unbleached-snow);
+            letter-spacing: 1.5em;
+            animation: preloaderPulse 1s ease-in-out infinite;
+        }
+
+        @keyframes preloaderPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes preloaderFade {
+            to { opacity: 0; pointer-events: none; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            mix-blend-mode: difference;
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.4rem;
+            letter-spacing: 0.4em;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            color: white;
+            text-decoration: none;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: white;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--alpine-void);
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: 
+                linear-gradient(180deg, rgba(26, 26, 25, 0.4) 0%, rgba(26, 26, 25, 0.7) 50%, var(--alpine-void) 100%),
+                url('jacket-hero.png');
+            background-size: cover;
+            background-position: center top;
+            opacity: 0.8;
+        }
+
+        .hero-video-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, transparent 0%, var(--alpine-void) 70%);
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            animation: heroFadeIn 1.5s ease-out 2.3s backwards;
+        }
+
+        @keyframes heroFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+        }
+
+        .hero-symbol {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 2rem;
+            opacity: 0.8;
+        }
+
+        .hero-symbol svg {
+            fill: var(--accent-gold);
+        }
+
+        .hero h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(3rem, 10vw, 9rem);
+            color: var(--unbleached-snow);
+            letter-spacing: 0.15em;
+            line-height: 0.9;
+            margin-bottom: 1rem;
+            padding: 0 1rem;
+        }
+
+        .hero-tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1rem, 2vw, 1.4rem);
+            color: var(--glacier-ash);
+            letter-spacing: 0.3em;
+            font-weight: 300;
+            font-style: italic;
+            margin-bottom: 3rem;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            padding: 1rem 3rem;
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            text-decoration: none;
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+        }
+
+        .hero-cta:hover {
+            background: var(--accent-gold);
+            color: var(--alpine-void);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .scroll-indicator span {
+            font-size: 0.6rem;
+            letter-spacing: 0.3em;
+            color: var(--glacier-ash);
+            opacity: 0.5;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--accent-gold), transparent);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* Philosophy Section */
+        .philosophy {
+            padding: 12rem 4rem;
+            background: var(--unbleached-snow);
+            position: relative;
+        }
+
+        .philosophy-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8rem;
+            align-items: center;
+        }
+
+        .philosophy-text h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 300;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+        }
+
+        .philosophy-text p {
+            font-size: 1rem;
+            line-height: 2;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .philosophy-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--basalt-whisper);
+            border-left: 2px solid var(--accent-gold);
+            padding-left: 2rem;
+            margin-top: 3rem;
+        }
+
+        .philosophy-visual {
+            position: relative;
+            height: 600px;
+        }
+
+        .philosophy-image {
+            width: 100%;
+            height: 100%;
+            background: var(--glacier-ash);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .philosophy-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, var(--basalt-whisper) 25%, transparent 25%),
+                        linear-gradient(-45deg, var(--basalt-whisper) 25%, transparent 25%);
+            background-size: 60px 60px;
+            opacity: 0.03;
+        }
+
+        .philosophy-image-inner {
+            position: absolute;
+            inset: 40px;
+            background: var(--alpine-void);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .philosophy-image-inner span {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 8rem;
+            color: var(--basalt-whisper);
+            opacity: 0.3;
+        }
+
+        /* Materials Section */
+        .materials {
+            padding: 10rem 4rem;
+            background: var(--alpine-void);
+            color: var(--unbleached-snow);
+        }
+
+        .materials-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 6rem;
+        }
+
+        .section-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.4em;
+            color: var(--accent-gold);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .materials-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+        }
+
+        .materials-header p {
+            color: var(--glacier-ash);
+            line-height: 1.8;
+            opacity: 0.7;
+        }
+
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .material-card {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 3rem 2rem;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .material-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent-gold);
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+        }
+
+        .material-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .material-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .material-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            color: var(--accent-gold);
+            opacity: 0.3;
+            margin-bottom: 1rem;
+        }
+
+        .material-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+
+        .material-card p {
+            font-size: 0.85rem;
+            color: var(--glacier-ash);
+            opacity: 0.6;
+            line-height: 1.7;
+        }
+
+        /* Products Section */
+        .products {
+            padding: 10rem 4rem;
+            background: var(--unbleached-snow);
+        }
+
+        .products-header {
+            text-align: center;
+            margin-bottom: 6rem;
+        }
+
+        .products-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 300;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .product-image {
+            aspect-ratio: 3/4;
+            background: var(--glacier-ash);
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-image::after {
+            content: 'Æ';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 6rem;
+            color: var(--basalt-whisper);
+            opacity: 0.1;
+            transition: all 0.5s ease;
+            pointer-events: none;
+        }
+
+        .product-image.has-image::after {
+            display: none;
+        }
+
+        .product-card:hover .product-image::after {
+            opacity: 0.2;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .product-tag {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            background: var(--alpine-void);
+            color: var(--unbleached-snow);
+            padding: 0.5rem 1rem;
+        }
+
+        .product-info h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-material {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 0.1em;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 10rem 4rem;
+            background: var(--basalt-whisper);
+            color: var(--unbleached-snow);
+        }
+
+        .features-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+        }
+
+        .features-left h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 300;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+        }
+
+        .features-left p {
+            color: var(--glacier-ash);
+            opacity: 0.7;
+            line-height: 1.8;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 1.5rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            border: 1px solid var(--accent-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .feature-icon span {
+            font-family: 'Bebas Neue', sans-serif;
+            color: var(--accent-gold);
+        }
+
+        .feature-text h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-text p {
+            font-size: 0.85rem;
+            color: var(--glacier-ash);
+            opacity: 0.6;
+            line-height: 1.6;
+        }
+
+        /* Manifesto Section */
+        .manifesto {
+            padding: 15rem 4rem;
+            background: var(--unbleached-snow);
+            text-align: center;
+            position: relative;
+        }
+
+        .manifesto::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            border: 1px solid var(--glacier-ash);
+            border-radius: 50%;
+            opacity: 0.5;
+        }
+
+        .manifesto-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .manifesto h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 300;
+            line-height: 1.4;
+            margin-bottom: 3rem;
+        }
+
+        .manifesto-taglines {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 4rem;
+        }
+
+        .manifesto-tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        /* Sustainability */
+        .sustainability {
+            padding: 8rem 4rem;
+            background: var(--alpine-void);
+            color: var(--unbleached-snow);
+        }
+
+        .sustainability-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .sustainability h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 0.4em;
+            color: var(--accent-gold);
+        }
+
+        .sustainability-text p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .sustainability-badges {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .sustainability-badge {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--glacier-ash);
+        }
+
+        /* Store Section */
+        .store {
+            padding: 10rem 4rem;
+            background: var(--glacier-ash);
+        }
+
+        .store-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .store-visual {
+            aspect-ratio: 4/5;
+            background: var(--alpine-void);
+            position: relative;
+        }
+
+        .store-visual::after {
+            content: 'REYKJAVIK';
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.4em;
+            color: var(--glacier-ash);
+            opacity: 0.5;
+        }
+
+        .store-info h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 300;
+            margin-bottom: 2rem;
+        }
+
+        .store-info p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .store-details {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--basalt-whisper);
+        }
+
+        .store-detail {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .store-detail span:first-child {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            color: var(--text-secondary);
+            width: 100px;
+        }
+
+        .store-detail span:last-child {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+        }
+
+        /* Newsletter */
+        .newsletter {
+            padding: 8rem 4rem;
+            background: var(--unbleached-snow);
+            text-align: center;
+        }
+
+        .newsletter-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .newsletter h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .newsletter-form input {
+            padding: 1rem 1.5rem;
+            border: 1px solid var(--basalt-whisper);
+            background: transparent;
+            font-family: inherit;
+            font-size: 0.85rem;
+            width: 300px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .newsletter-form input:focus {
+            border-color: var(--accent-gold);
+        }
+
+        .newsletter-form button {
+            padding: 1rem 2rem;
+            background: var(--alpine-void);
+            color: var(--unbleached-snow);
+            border: none;
+            font-family: inherit;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            background: var(--basalt-whisper);
+        }
+
+        /* Footer */
+        footer {
+            padding: 6rem 4rem 3rem;
+            background: var(--alpine-void);
+            color: var(--unbleached-snow);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand .logo {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .footer-brand p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--glacier-ash);
+            opacity: 0.7;
+            font-style: italic;
+        }
+
+        .footer-column h4 {
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            margin-bottom: 1.5rem;
+            color: var(--accent-gold);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-column a {
+            color: var(--glacier-ash);
+            text-decoration: none;
+            font-size: 0.85rem;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-bottom span {
+            font-size: 0.75rem;
+            color: var(--glacier-ash);
+            opacity: 0.5;
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-legal a {
+            font-size: 0.7rem;
+            color: var(--glacier-ash);
+            text-decoration: none;
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-legal a:hover {
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .philosophy-grid,
+            .features-content,
+            .sustainability-content,
+            .store-content,
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .materials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            nav {
+                padding: 1rem 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .materials-grid,
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .philosophy,
+            .materials,
+            .products,
+            .features,
+            .manifesto,
+            .store {
+                padding: 6rem 2rem;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .newsletter-form input {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <span class="preloader-text">ASCENDING</span>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <span class="logo">ÆTHERPEAK</span>
+        <ul class="nav-links">
+            <li><a href="#philosophy">Philosophy</a></li>
+            <li><a href="#materials">Materials</a></li>
+            <li><a href="#collection">Collection</a></li>
+            <li><a href="#store">Flagship</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-video-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-symbol">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="50,10 90,85 10,85"/>
+                </svg>
+            </div>
+            <h1>ÆTHERPEAK</h1>
+            <p class="hero-tagline">Alpine Performance for the Ascended</p>
+            <a href="#collection" class="hero-cta">Enter the Collection</a>
+        </div>
+        <div class="scroll-indicator">
+            <span>DESCEND</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Philosophy -->
+    <section class="philosophy" id="philosophy">
+        <div class="philosophy-grid">
+            <div class="philosophy-text fade-in">
+                <span class="section-label">OUR PHILOSOPHY</span>
+                <h2>You don't hike to escape society. You hike to rise above it.</h2>
+                <p>ÆTHERPEAK™ is an ultra-luxury alpine performance brand for people who do not technically need expedition-grade gear, but emotionally require it. Designed for environments ranging from Patagonia to the coffee shop.</p>
+                <p>If other brands are "serious," ÆTHERPEAK is absurdly reverent. We believe that technical excellence is a state of mind, and that true performance transcends the mountain itself.</p>
+                <blockquote class="philosophy-quote">
+                    "Weather is a variable. ÆTHERPEAK is a constant."
+                </blockquote>
+            </div>
+            <div class="philosophy-visual fade-in">
+                <div class="philosophy-image">
+                    <div class="philosophy-image-inner">
+                        <span>Æ</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Materials -->
+    <section class="materials" id="materials">
+        <div class="materials-header fade-in">
+            <span class="section-label">MATERIALS THEOLOGY</span>
+            <h2>Every fiber exists for a reason. Even if that reason is unknowable.</h2>
+            <p>We lead with materials, not use. Because use is temporary. Materials are eternal.</p>
+        </div>
+        <div class="materials-grid">
+            <div class="material-card fade-in">
+                <span class="material-number">01</span>
+                <h3>QuantumShell™ 9.7</h3>
+                <p>Tri-laminated membrane technology rated at 9.7. No one knows what the 9.7 refers to, including us. But it's higher than 9.6.</p>
+            </div>
+            <div class="material-card fade-in">
+                <span class="material-number">02</span>
+                <h3>Merino Adjacent Fiber</h3>
+                <p>Bio-engineered to exist beside merino wool conceptually. Not merino. Better. The sheep are merely consultants.</p>
+            </div>
+            <div class="material-card fade-in">
+                <span class="material-number">03</span>
+                <h3>Japanese Micro-Zippers</h3>
+                <p>Individually tested by someone named Lars in conditions you will never experience. Each zipper has a serial number. You won't need it.</p>
+            </div>
+            <div class="material-card fade-in">
+                <span class="material-number">04</span>
+                <h3>Dyneema, Obviously</h3>
+                <p>Used even when cotton would be fine. Tensile strength matters in situations you'll read about but never face.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section class="products" id="collection">
+        <div class="products-header fade-in">
+            <span class="section-label">THE COLLECTION</span>
+            <h2>Technically Athletic. Socially Dominant.</h2>
+        </div>
+        <div class="products-grid">
+            <div class="product-card fade-in">
+                <div class="product-image has-image">
+                    <img src="jacket-hero.png" alt="Apex Shell Jacket">
+                    <span class="product-tag">GLACIER ASH</span>
+                </div>
+                <div class="product-info">
+                    <h3>Apex Shell Jacket</h3>
+                    <p class="product-material">QuantumShell™ 9.7 | Laser-Aligned Seams</p>
+                    <span class="product-price">$2,400</span>
+                </div>
+            </div>
+            <div class="product-card fade-in">
+                <div class="product-image has-image">
+                    <img src="sweatpants-collection.png" alt="ÆXYS AlpineSweat Collection">
+                    <span class="product-tag">BASALT WHISPER</span>
+                </div>
+                <div class="product-info">
+                    <h3>ÆXYS™ AlpineSweat</h3>
+                    <p class="product-material">Merino Adjacent | Meditative Breathability</p>
+                    <span class="product-price">$1,100</span>
+                </div>
+            </div>
+            <div class="product-card fade-in">
+                <div class="product-image">
+                    <span class="product-tag">ALPINE VOID</span>
+                </div>
+                <div class="product-info">
+                    <h3>Elevated Sweatpants™</h3>
+                    <p class="product-material">QuantumShell™ 9.7 | Japanese Micro-Zippers</p>
+                    <span class="product-price">$1,650</span>
+                </div>
+            </div>
+            <div class="product-card fade-in">
+                <div class="product-image">
+                    <span class="product-tag">UNBLEACHED SNOW</span>
+                </div>
+                <div class="product-info">
+                    <h3>Summit Beanie</h3>
+                    <p class="product-material">Triple-Knit Dyneema | Thermal Resonance</p>
+                    <span class="product-price">$290</span>
+                </div>
+            </div>
+            <div class="product-card fade-in">
+                <div class="product-image">
+                    <span class="product-tag">LIMITED</span>
+                </div>
+                <div class="product-info">
+                    <h3>Non-Load Bearing Carabiner</h3>
+                    <p class="product-material">Aerospace Aluminum | Decorative Only</p>
+                    <span class="product-price">$420</span>
+                </div>
+            </div>
+            <div class="product-card fade-in">
+                <div class="product-image">
+                    <span class="product-tag">ESSENTIAL</span>
+                </div>
+                <div class="product-info">
+                    <h3>Expedition Tote</h3>
+                    <p class="product-material">Full Dyneema Construction | Unnecessary</p>
+                    <span class="product-price">$980</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <div class="features-content">
+            <div class="features-left fade-in">
+                <span class="section-label">ENGINEERING</span>
+                <h2>Features No One Asked For. Precision Everyone Deserves.</h2>
+                <p>Every element of ÆTHERPEAK gear has been obsessively engineered to exceed requirements that don't exist, for conditions you'll never face.</p>
+            </div>
+            <div class="feature-list">
+                <div class="feature-item fade-in">
+                    <div class="feature-icon"><span>N</span></div>
+                    <div class="feature-text">
+                        <h4>Geomagnetic Seam Alignment</h4>
+                        <p>All seams laser-aligned to geomagnetic north. This serves no practical purpose but feels correct.</p>
+                    </div>
+                </div>
+                <div class="feature-item fade-in">
+                    <div class="feature-icon"><span>B</span></div>
+                    <div class="feature-text">
+                        <h4>Meditative Breathability Testing</h4>
+                        <p>Breathability measured during controlled meditative breathing. Active use data is considered spiritually irrelevant.</p>
+                    </div>
+                </div>
+                <div class="feature-item fade-in">
+                    <div class="feature-icon"><span>H</span></div>
+                    <div class="feature-text">
+                        <h4>Existential Hood Design</h4>
+                        <p>Hood designed to fit over a helmet or existential dread. Both are equally likely scenarios.</p>
+                    </div>
+                </div>
+                <div class="feature-item fade-in">
+                    <div class="feature-icon"><span>P</span></div>
+                    <div class="feature-text">
+                        <h4>Caseless iPhone Pocket</h4>
+                        <p>Internal pocket specifically sized for an iPhone without a case. Case users are not the target customer.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Manifesto -->
+    <section class="manifesto">
+        <div class="manifesto-content fade-in">
+            <span class="section-label">THE CREED</span>
+            <h2>Compromise is heavier than any pack you'll carry. Elevation is not a destination. It's a disposition.</h2>
+            <div class="manifesto-taglines">
+                <span class="manifesto-tagline">"Elevate Relentlessly."</span>
+                <span class="manifesto-tagline">"For Conditions You'll Never Face."</span>
+                <span class="manifesto-tagline">"The Last Layer You'll Ever Need (Until Next Season)."</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sustainability -->
+    <section class="sustainability">
+        <div class="sustainability-content fade-in">
+            <h2>RESPONSIBILITY</h2>
+            <div class="sustainability-text">
+                <p>Our commitment to the planet is as unwavering as it is vague. Carbon considered. Impact measured in ways we choose not to disclose. Our factory is ethically remote—far enough that questions become impractical.</p>
+                <div class="sustainability-badges">
+                    <span class="sustainability-badge">CARBON CONSIDERED™</span>
+                    <span class="sustainability-badge">ETHICALLY REMOTE</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Store -->
+    <section class="store" id="store">
+        <div class="store-content">
+            <div class="store-visual fade-in"></div>
+            <div class="store-info fade-in">
+                <span class="section-label">FLAGSHIP</span>
+                <h2>One Store. No Compromises. No Sales. Ever.</h2>
+                <p>Located somewhere cold conceptually, not practically. Our staff wear black and speak quietly. The experience is not transactional—it's transformational.</p>
+                <p>Appointments are not required but are spiritually encouraged. Walk-ins are assessed individually.</p>
+                <div class="store-details">
+                    <div class="store-detail">
+                        <span>LOCATION</span>
+                        <span>Reykjavik, Iceland</span>
+                    </div>
+                    <div class="store-detail">
+                        <span>HOURS</span>
+                        <span>By Alignment Only</span>
+                    </div>
+                    <div class="store-detail">
+                        <span>CONTACT</span>
+                        <span>You'll Know When</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="newsletter-content fade-in">
+            <h2>Join the Ascended</h2>
+            <p>Receive transmissions about new collections, materials theology, and exclusive access to things you don't need but will want.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address">
+                <button type="submit">ASCEND</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <span class="logo">ÆTHERPEAK™</span>
+                <p>Alpine Performance for the Ascended</p>
+            </div>
+            <div class="footer-column">
+                <h4>COLLECTION</h4>
+                <ul>
+                    <li><a href="#">Shell Systems</a></li>
+                    <li><a href="#">Midlayers</a></li>
+                    <li><a href="#">Technical Pants</a></li>
+                    <li><a href="#">Accessories</a></li>
+                    <li><a href="#">Non-Essential Essentials</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>PHILOSOPHY</h4>
+                <ul>
+                    <li><a href="#">Materials Theology</a></li>
+                    <li><a href="#">Engineering Doctrine</a></li>
+                    <li><a href="#">Carbon Considered</a></li>
+                    <li><a href="#">The Creed</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>EXPERIENCE</h4>
+                <ul>
+                    <li><a href="#">Flagship Store</a></li>
+                    <li><a href="#">By Appointment</a></li>
+                    <li><a href="#">Private Consultations</a></li>
+                    <li><a href="#">Corporate Ascension</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 ÆTHERPEAK™ All Rights Reserved. Elevation is Non-Transferable.</span>
+            <div class="footer-legal">
+                <a href="#">Privacy Doctrine</a>
+                <a href="#">Terms of Ascent</a>
+                <a href="#">Cookie Alignment</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Newsletter form (just for show)
+        document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const button = this.querySelector('button');
+            button.textContent = 'ASCENDING...';
+            setTimeout(() => {
+                button.textContent = 'ELEVATED';
+                this.querySelector('input').value = '';
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
